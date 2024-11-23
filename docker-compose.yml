@@ -1,0 +1,23 @@
+services:
+  news:
+    container_name: news
+    build: ./news
+    ports:
+      - "5000:5000"
+    restart: always
+    networks:
+      - news-network
+    working_dir: /usr/src/app
+
+  tts:
+    container_name: tts
+    build: ./tts
+    ports:
+      - "5002:5002"
+    restart: always
+    networks:
+      - news-network
+
+networks:
+  news-network:
+    external: true
