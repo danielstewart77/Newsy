@@ -1,0 +1,70 @@
+# swagger.yaml
+openapi: 3.0.0
+info:
+  title: Newsy API
+  version: 1.0.0
+  description: API documentation for the Newsy news aggregation service.
+servers:
+  - url: http://localhost:5000
+    description: Local server
+paths:
+  /api/ai:
+    get:
+      summary: Get AI News
+      responses:
+        '200':
+          description: A list of AI news articles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        summary:
+                          type: string
+  /api/infosec:
+    get:
+      summary: Get Infosec News
+      responses:
+        '200':
+          description: A list of Infosec news articles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        summary:
+                          type: string
+  /api/crypto:
+    get:
+      summary: Get Crypto News
+      responses:
+        '200':
+          description: A list of Crypto news articles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        summary:
+                          type: string
