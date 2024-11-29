@@ -1,0 +1,14 @@
+feedparser
+requests
+beautifulsoup4
+python-dotenv
+pydantic
+openai
+hypercorn
+quart
+quart-cors
+swagger_ui
+werkzeug
+sqlalchemy
+pgvector
+psycopg2
