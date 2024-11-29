@@ -1,9 +1,9 @@
 services:
   news:
     container_name: news
-    build: ./news
+    build: .
     ports:
-      - "5000:5000"
+      - "8000:8000"
     restart: always
     networks:
       - news-network
@@ -11,13 +11,40 @@ services:
 
   tts:
     container_name: tts
-    build: ./tts
+    image: synesthesiam/opentts:en
     ports:
-      - "5002:5002"
+      - "5500:5500"
+    networks:
+      - news-network
+
+  database:
+    container_name: database
+    image: ankane/pgvector:latest
+    env_file: database/secrets.env
+    environment:
+      - POSTGRES_USER=daniel
+      - POSTGRES_DB=news 
+      - PGDATA=/var/lib/postgresql/data
     restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # - ./SwarmDB/db_backup.sql:/usr/src/app/db_backup.sql
+      # - ./SwarmDB/entrypoint.sh:/usr/src/app/entrypoint.sh
+      # - ./SwarmDB/init_vector_db.sql:/docker-entrypoint-initdb.d/init_vector_db.sql  # Initialization scripts
+      # - ./SwarmDB/init_embedding_tables.sql:/docker-entrypoint-initdb.d/init_embedding_tables.sql  # Initialization scripts
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    #entrypoint: ["bash", "/usr/src/app/entrypoint.sh"]
+    stop_grace_period: 60s
     networks:
       - news-network
 
 networks:
   news-network:
-    external: true
+    name: news-network
+    driver: bridge
+
+volumes:
+  pgdata:
