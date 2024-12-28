@@ -11,4 +11,4 @@ swagger_ui
 werkzeug
 sqlalchemy
 pgvector
-psycopg2
+psycopg2-binary
